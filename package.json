@@ -2,8 +2,7 @@
   "name": "cognito-service",
   "version": "1.0.0",
   "description": "",
-  "main": "src/CognitoService.ts",
-  "type": "module",
+  "main": "build/CognitoService.js",
   "scripts": {
     "synth": "cd infrastructure && npx cdk synth",
     "deploy": "cd infrastructure && npx cdk deploy",
