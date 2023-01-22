@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "synth": "cd infrastructure && npx cdk synth",
-    "deploy": "cd infrastructure && npx cdk deploy"
+    "deploy": "cd infrastructure && npx cdk deploy",
+    "postinstall": "tsc --outDir ./build"
   },
   "author": "",
   "license": "ISC",
