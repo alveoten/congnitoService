@@ -32,7 +32,7 @@ export class CognitoService {
 
   public async challengeNewPassword(username: string, password: string, session: string) {
     try {
-      this.getClient().respondToAuthChallenge({
+      return await this.getClient().respondToAuthChallenge({
         ChallengeName: 'NEW_PASSWORD_REQUIRED',
         ClientId: this.clientId,
         ChallengeResponses: {
@@ -40,7 +40,7 @@ export class CognitoService {
           'NEW_PASSWORD': password,
         },
         Session: session
-      })
+      }).promise()
     } catch (err) {
       console.error(err)
     }
