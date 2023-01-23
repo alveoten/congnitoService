@@ -20,7 +20,7 @@ export class CognitoService {
           }
         }
       ).promise()
-      if (!res.AuthenticationResult || ! res.ChallengeName) {
+      if (!res.AuthenticationResult && !res.ChallengeName) {
         throw new Error('undefined response from cognito')
       }
       return res
