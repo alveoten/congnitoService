@@ -30,9 +30,10 @@ export class CognitoService {
     }    
   }
 
-  public async challengeNewPassword(username: string, password: string, session: string) {
+  public async challengeNewPassword(username: string, password: string, session: string)
+  : Promise<AWS.CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse> {
     try {
-      return await this.getClient().respondToAuthChallenge({
+      const res = await this.getClient().respondToAuthChallenge({
         ChallengeName: 'NEW_PASSWORD_REQUIRED',
         ClientId: this.clientId,
         ChallengeResponses: {
@@ -41,8 +42,10 @@ export class CognitoService {
         },
         Session: session
       }).promise()
+      return res
     } catch (err) {
       console.error(err)
+      throw err
     }
   }
 
