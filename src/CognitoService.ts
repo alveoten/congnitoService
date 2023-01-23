@@ -6,7 +6,8 @@ import {CognitoJwtFields} from './models/CognitoJwtFields'
 export class CognitoService {
   constructor(private clientId: string, private poolId: string, private secret: string, private region: string) {}
 
-  public async signIn(username: string, password: string): Promise<AWS.CognitoIdentityServiceProvider.AuthenticationResultType> {
+  public async signIn(username: string, password: string)
+  : Promise<AWS.CognitoIdentityServiceProvider.InitiateAuthResponse> {
     try {
       const res = await this.getClient().initiateAuth(
         {
@@ -19,10 +20,10 @@ export class CognitoService {
           }
         }
       ).promise()
-      if (!res.AuthenticationResult ) {
+      if (!res.AuthenticationResult || ! res.ChallengeName) {
         throw new Error('undefined response from cognito')
       }
-      return res.AuthenticationResult
+      return res
     } catch (error) {
       console.log(error)
       throw error
