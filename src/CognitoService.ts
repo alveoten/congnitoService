@@ -39,6 +39,7 @@ export class CognitoService {
         ChallengeResponses: {
           'USERNAME': username,
           'NEW_PASSWORD': password,
+          'SECRET_HASH': this.getSecret('username')
         },
         Session: session
       }).promise()
