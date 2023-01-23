@@ -30,6 +30,22 @@ export class CognitoService {
     }    
   }
 
+  public async challengeNewPassword(username: string, password: string, session: string) {
+    try {
+      this.getClient().respondToAuthChallenge({
+        ChallengeName: 'NEW_PASSWORD_REQUIRED',
+        ClientId: this.clientId,
+        ChallengeResponses: {
+          'USERNAME': username,
+          'NEW_PASSWORD': password,
+        },
+        Session: session
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   public async signUp(username: string, email: string, password: string) {
     await this.getClient().signUp(
       {
